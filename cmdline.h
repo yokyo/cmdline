@@ -27,6 +27,8 @@
 
 #pragma once
 
+//#define USE_DEMANGLING 
+
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -36,7 +38,9 @@
 #include <typeinfo>
 #include <cstring>
 #include <algorithm>
-#include <cxxabi.h>
+#ifdef USE_DEMANGLING
+	#include <cxxabi.h>
+#endif
 #include <cstdlib>
 
 namespace cmdline{
@@ -104,11 +108,15 @@ Target lexical_cast(const Source &arg)
 
 static inline std::string demangle(const std::string &name)
 {
+#ifdef USE_DEMANGLING
   int status=0;
-  char *p=abi::__cxa_demangle(name.c_str(), 0, 0, &status);
+  const char *p=::__cxa_demangle(name.c_str(), 0, 0, &status);
   std::string ret(p);
   free(p);
   return ret;
+#else
+	return name;
+#endif
 }
 
 template <class T>

@@ -5,7 +5,12 @@ cmdline: A simple command line parser for C++
 About
 -----
 
-This is a simple command line parser for C++.
+This is a simple command line parser for C++. 
+Base repo:https://github.com/tanakh/cmdline
+
+What's more than base?Nothing,except could be
+compiled with VS,which means it cross platform
+now.)
 
 - Easy to use
 - Only one header file
